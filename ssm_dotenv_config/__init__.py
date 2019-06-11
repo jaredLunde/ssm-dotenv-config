@@ -31,7 +31,8 @@ def get(config=None, ssm_path=None, ssm_client=None, dotenv_path=None):
             if isinstance(cfg.get(keys[-1]), list):
                 value = list({*cfg[keys[-1]], *value})
         elif isinstance(value, dict):
-            value = {**cfg[keys[-1]], **value}
+            if isinstance(cfg.get(keys[-1]), dict):
+                value = {**cfg[keys[-1]], **value}
 
         cfg[keys[-1]] = value
 
